@@ -12,6 +12,11 @@ if [ -z "$KEYSTONE_DB" ];then
   exit 1
 fi
 
+if [ -z "$MEMCACHE_SERVER" ];then
+  echo "error: MEMCACHE_SERVER not set"
+  exit 1
+fi
+
 CRUDINI='/usr/bin/crudini'
 
 ADMIN_TOKEN=${ADMIN_TOKEN:=`openssl rand -hex 10`}
@@ -25,7 +30,7 @@ if [ ! -f /etc/keystone/.complete ];then
     $CRUDINI --set /etc/keystone/keystone.conf DEFAULT admin_token $ADMIN_TOKEN
     $CRUDINI --set /etc/keystone/keystone.conf DEFAULT verbose True
     $CRUDINI --set /etc/keystone/keystone.conf database connection $CONNECTION
-    $CRUDINI --set /etc/keystone/keystone.conf memcache servers localhost:11211
+    $CRUDINI --set /etc/keystone/keystone.conf memcache servers ${MEMCACHE_SERVER}:11211
     $CRUDINI --set /etc/keystone/keystone.conf token provider keystone.token.providers.uuid.Provider
     $CRUDINI --set /etc/keystone/keystone.conf token driver keystone.token.persistence.backends.memcache.Token
     $CRUDINI --set /etc/keystone/keystone.conf revoke driver keystone.contrib.revoke.backends.sql.Revoke

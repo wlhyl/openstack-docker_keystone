@@ -1,5 +1,5 @@
 # image name lzh/keystone:kilo
-FROM 10.64.0.50:5000/lzh/openstackbase:kilo
+FROM registry.lzh.site:5000/lzh/openstackbase:kilo
 
 MAINTAINER Zuhui Liu penguin_tux@live.com
 
@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get dist-upgrade -y
 RUN apt-get -t jessie-backports install keystone -y
-RUN apt-get install apache2 libapache2-mod-wsgi memcached python-memcache curl -y
+RUN apt-get install apache2 libapache2-mod-wsgi python-memcache curl -y
 RUN apt-get clean
 
 RUN env --unset=DEBIAN_FRONTEND
@@ -36,7 +36,6 @@ RUN chown -R keystone:keystone /var/www/cgi-bin/keystone
 RUN chmod 755 /var/www/cgi-bin/keystone/*
 
 ADD apache2.conf /etc/supervisor/conf.d/apache2.conf
-ADD memcached.conf /etc/supervisor/conf.d/memcached.conf
 
 ADD entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
