@@ -24,6 +24,7 @@ RUN rm -rf /var/log/keystone/*
 VOLUME ["/etc/keystone"]
 VOLUME ["/var/log/keystone"]
 
+RUN rm -rf /etc/apache2/sites-enabled/*
 ADD wsgi-keystone.conf  /etc/apache2/sites-available/wsgi-keystone.conf
 RUN ln -s /etc/apache2/sites-available/wsgi-keystone.conf /etc/apache2/sites-enabled
 
