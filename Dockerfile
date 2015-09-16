@@ -11,8 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 RUN apt-get dist-upgrade -y
-RUN apt-get -t jessie-backports install keystone -y
-RUN apt-get install apache2 libapache2-mod-wsgi python-memcache curl -y
+RUN apt-get install keystone apache2 libapache2-mod-wsgi python-memcache curl -y
 RUN apt-get clean
 
 RUN env --unset=DEBIAN_FRONTEND
