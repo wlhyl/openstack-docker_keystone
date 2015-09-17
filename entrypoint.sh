@@ -38,6 +38,8 @@ if [ ! -f /etc/keystone/.complete ];then
     touch /etc/keystone/.complete
 fi
 
+chown -R keystone:keystone /var/log/keystone/
+
 # 同步数据库
 echo 'select * from user limit 1;' | mysql -h$KEYSTONE_DB  -ukeystone -p$KEYSTONE_DBPASS keystone
 if [ $? != 0 ];then
