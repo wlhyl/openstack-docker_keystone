@@ -29,10 +29,14 @@ if [ ! -f /etc/keystone/.complete ];then
     
     $CRUDINI --set /etc/keystone/keystone.conf DEFAULT admin_token $ADMIN_TOKEN
     $CRUDINI --set /etc/keystone/keystone.conf DEFAULT verbose True
+ 
     $CRUDINI --set /etc/keystone/keystone.conf database connection $CONNECTION
+
     $CRUDINI --set /etc/keystone/keystone.conf memcache servers ${MEMCACHE_SERVER}:11211
+
     $CRUDINI --set /etc/keystone/keystone.conf token provider keystone.token.providers.uuid.Provider
     $CRUDINI --set /etc/keystone/keystone.conf token driver keystone.token.persistence.backends.memcache.Token
+
     $CRUDINI --set /etc/keystone/keystone.conf revoke driver keystone.contrib.revoke.backends.sql.Revoke
     
     touch /etc/keystone/.complete
