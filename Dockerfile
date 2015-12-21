@@ -23,7 +23,7 @@ RUN sed -i s/^Listen/#Listen/g /etc/httpd/conf/httpd.conf
 ADD wsgi-keystone.conf  /etc/httpd/conf.d/wsgi-keystone.conf
 
 
-ADD httpd.conf /etc/supervisord.d/httpd.conf
+ADD httpd.conf /etc/supervisord.d/httpd.ini
 
 ADD entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
