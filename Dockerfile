@@ -1,4 +1,4 @@
-# image name lzh/keystone:kilo
+# image name lzh/keystone:liberty
 FROM 10.64.0.50:5000/lzh/openstackbase:liberty
 
 MAINTAINER Zuhui Liu penguin_tux@live.com
@@ -9,6 +9,7 @@ ENV OPENSTACK_VERSION liberty
 RUN yum update -y
 RUN yum install -y openstack-keystone httpd mod_wsgi python-memcached
 RUN yum clean all
+RUN rm -rf /var/cache/yum/*
 
 RUN cp -rp /etc/keystone/ /keystone
 RUN rm -rf /etc/keystone/*
