@@ -3,17 +3,17 @@ FROM 10.64.0.50:5000/lzh/openstackbase:liberty
 
 MAINTAINER Zuhui Liu penguin_tux@live.com
 
-ENV BASE_VERSION 2015-12-16
+ENV BASE_VERSION 2015-12-28
 ENV OPENSTACK_VERSION liberty
+ENV BUID_VERSION 2015-12-28
 
-RUN yum update -y
-RUN yum install -y openstack-keystone httpd mod_wsgi python-memcached
-RUN yum clean all
-RUN rm -rf /var/cache/yum/*
+RUN yum update -y && \
+         yum install -y openstack-keystone httpd mod_wsgi python-memcached && \
+         rm -rf /var/cache/yum/*
 
-RUN cp -rp /etc/keystone/ /keystone
-RUN rm -rf /etc/keystone/*
-RUN rm -rf /var/log/keystone/*
+RUN cp -rp /etc/keystone/ /keystone && \
+         rm -rf /etc/keystone/* && \
+         rm -rf /var/log/keystone/*
 
 VOLUME ["/etc/keystone"]
 VOLUME ["/var/log/keystone"]
